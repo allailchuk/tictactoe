@@ -111,12 +111,11 @@
                 || checkX(2) && checkX(5) && checkX(8)
                 || checkX(3) && checkX(6) && checkX(9) 
 
-  			) {
+  			){
 
   				alert('User won!');
   				return;
   			}
-
   			//Computer's turn to make move
   			if (!checkX(5) && !checkO(5)) {
   				cell=$('#container div : nth-child(5)');
@@ -224,17 +223,8 @@
                     var randomlySelectedIndex = Math.floor(Math.random() * emptyCells.length);
                     cell = emptyCells[randomlySelectedIndex];
                 }
-  			
-
   		})
-
-
-  	})  
-
-
-    
+  	})
   </script>
-
 </body>
-
 </html>
