@@ -74,7 +74,24 @@
   <script>
   	$(document).ready(function(){
 
-  		var cell;
+        var cell;
+
+        var player;
+
+		//reloading page after game is over
+        function pageReload() {
+            location.reload();
+        }
+
+        //delaying page reload
+        function delayedReload() {
+            window.setTimeout(pageReload, 3500);
+        }
+
+        //winner's greeting
+        function winnersGreeting(player) {
+            window.setTimeout(alert(player + " won!"), 2000);
+        }
 
 
   		function checkX (cellNumber) {
@@ -112,9 +129,10 @@
                 || checkX(3) && checkX(6) && checkX(9) 
 
   			){
+				player = 'user';
+  			    delayedReload();
+                winnersGreeting(player);
 
-  				alert('User won!');
-  				return;
   			}
   			//Computer's turn to make move
   			if (!checkX(5) && !checkO(5)) {
@@ -242,7 +260,10 @@
             || checkO(3) && checkO(6) && checkO(9)
 
             ){
-                alert('Computer won!');
+				player = 'computer';
+                delayedReload();
+                winnersGreeting(player);
+
             }
 
   		})
