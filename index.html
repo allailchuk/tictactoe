@@ -78,11 +78,11 @@
 
 
   		function checkX (cellNumber) {
-  			return $('#container div : nth-child(' + cellNumber + ')').hasClass('x');
+  			return $('#container div:nth-child(' + cellNumber + ')').hasClass('x');
   		}
 
   		function checkO (cellNumber) {
-  			return $('#container div : nth-child(' + cellNumber + ')').hasClass('o');
+  			return $('#container div:nth-child(' + cellNumber + ')').hasClass('o');
   		}
 
   		
@@ -118,13 +118,13 @@
   			}
   			//Computer's turn to make move
   			if (!checkX(5) && !checkO(5)) {
-  				cell=$('#container div : nth-child(5)');
+  				cell=$('#container div:nth-child(5)');
   				} else if(checkO(1) && checkO(2) && !checkO(3) && !checkX(3)) {
                     cell = $('#container div:nth-child(3)');
                 } else if(checkO(1) && checkO(3) && !checkO(2) && !checkX(2)) {
                     cell = $('#container div:nth-child(2)');
                 } else if(checkO(2) && checkO(3) && !checkO(1) && !checkX(1)) {
-                    cell = $('#container div:nth-child(1)');    
+                    cell = $('#container div:nth-child(1)');
                 } else if(checkO(4) && checkO(5) && !checkO(6) && !checkX(6)) {
                     cell = $('#container div:nth-child(6)');
                 } else if(checkO(4) && checkO(6) && !checkO(5) && !checkX(5)) {
@@ -223,6 +223,28 @@
                     var randomlySelectedIndex = Math.floor(Math.random() * emptyCells.length);
                     cell = emptyCells[randomlySelectedIndex];
                 }
+            $(cell).addClass('o');
+
+            //Check if computer won
+            if (
+                //Diagonal
+			   checkO(1) && checkO(5) && checkO(9)
+            || checkO(3) && checkO(5) && checkO(7)
+
+            // Horizontal
+            || checkO(1) && checkO(2) && checkO(3)
+            || checkO(4) && checkO(5) && checkO(6)
+            || checkO(7) && checkO(8) && checkO(9)
+
+            // Vertical
+            || checkO(1) && checkO(4) && checkO(7)
+            || checkO(2) && checkO(5) && checkO(8)
+            || checkO(3) && checkO(6) && checkO(9)
+
+            ){
+                alert('Computer won!');
+            }
+
   		})
   	})
   </script>
