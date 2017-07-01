@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NEW!My Tic Tac Toe game</title>
+
+    <meta charset="utf-8" />
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style type="text/css">
+
+    	#container {
+    		height: 450px;
+    		width: 450px;
+    		border-top: 1px solid black;
+    		border-left: 1px solid black;
+    		position: fixed;
+    		top: 50%;
+    		left: 50%;
+    		margin-top: -220px;
+    		margin-left: -220px;
+    		background-color: #F1F1F1;
+    	}
+
+    	#container div {
+    		height: 150px;
+    		width: 150px;
+    		border-bottom: 1px solid black;
+    		border-right: 1px solid black;
+    		display: inline;
+    		float: left;
+    		box-sizing: border-box;   		
+    	}
+
+    	#container div:hover {
+    		background-color: white;
+    	}
+
+    	#container .x {
+    		background-image: url(images/x.png);
+    		background-repeat: no-repeat;
+    		background-size: 70%;
+    		background-position: center;
+    		background-color: #fff;
+
+    	}
+
+    	#container .o {
+    		background-image: url(images/o.png);
+    		background-repeat: no-repeat;
+    		background-size: 70%;
+    		background-position: center;
+    		background-color: #fff;
+    	}
+
+    </style>
+</head>
+
+<body>
+	<div id="container">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>		
+	</div>
+
+  <script>
+  	$(document).ready(function(){
+
+  		var cell;
+
+
+  		function checkX (cellNumber) {
+  			return $('#container div : nth-child(' + cellNumber + ')').hasClass('x');
+  		}
+
+  		function checkO (cellNumber) {
+  			return $('#container div : nth-child(' + cellNumber + ')').hasClass('o');
+  		}
+
+  		
+  		$('#container div').on('click', function(event) {
+  			// do nothing when cell is occupied
+  			if ($(this).hasClass('x') || $(this).hasClass('o')) {
+  				return;
+  			}
+
+  			//Adding X to the cell
+  			$(this).addClass('x');
+
+  			//Check if user won
+  			if (
+  				//Diagonal
+  				   checkX(1) && checkX(5) && checkX(9)
+  				|| checkX(3) && checkX(5) && checkX(7)
+
+  				// Horizontal 
+                || checkX(1) && checkX(2) && checkX(3)
+                || checkX(4) && checkX(5) && checkX(6)
+                || checkX(7) && checkX(8) && checkX(9)
+
+                // Vertical 
+                || checkX(1) && checkX(4) && checkX(7)
+                || checkX(2) && checkX(5) && checkX(8)
+                || checkX(3) && checkX(6) && checkX(9) 
+
+  			) {
+
+  				alert('User won!');
+  				return;
+  			}
+
+  			//Computer's turn to make move
+  			if (!checkX(5) && !checkO(5)) {
+  				cell=$('#container div : nth-child(5)');
+  				} else if(checkO(1) && checkO(2) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)');
+                } else if(checkO(1) && checkO(3) && !checkO(2) && !checkX(2)) {
+                    cell = $('#container div:nth-child(2)');
+                } else if(checkO(2) && checkO(3) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)');    
+                } else if(checkO(4) && checkO(5) && !checkO(6) && !checkX(6)) {
+                    cell = $('#container div:nth-child(6)');
+                } else if(checkO(4) && checkO(6) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkO(5) && checkO(6) && !checkO(4) && !checkX(4)) {
+                    cell = $('#container div:nth-child(4)');
+                } else if(checkO(7) && checkO(8) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkO(7) && checkO(9) && !checkO(8) && !checkX(8)) {
+                    cell = $('#container div:nth-child(8)');
+                } else if(checkO(8) && checkO(9) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkO(1) && checkO(4) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkO(1) && checkO(7) && !checkO(4) && !checkX(4)) {
+                    cell = $('#container div:nth-child(4)');
+                } else if(checkO(4) && checkO(7) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)'); 
+                } else if(checkO(2) && checkO(5) && !checkO(8) && !checkX(8)) {
+                    cell = $('#container div:nth-child(8)');
+                } else if(checkO(2) && checkO(8) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkO(5) && checkO(8) && !checkO(2) && !checkX(2)) {
+                    cell = $('#container div:nth-child(2)');
+                } else if(checkO(3) && checkO(6) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkO(3) && checkO(9) && !checkO(6) && !checkX(6)) {
+                    cell = $('#container div:nth-child(6)');
+                } else if(checkO(6) && checkO(9) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)'); 
+                } else if(checkO(1) && checkO(5) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkO(5) && checkO(9) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)');
+                } else if(checkO(1) && checkO(9) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkO(3) && checkO(5) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkO(5) && checkO(7) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)');
+                } else if(checkO(3) && checkO(7) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');                  
+                } else if(checkX(1) && checkX(2) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)');
+                } else if(checkX(2) && checkX(3) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)');
+                } else if(checkX(1) && checkX(3) && !checkO(2) && !checkX(2)) {
+                    cell = $('#container div:nth-child(2)');
+                } else if(checkX(4) && checkX(5) && !checkO(6) && !checkX(6)) {
+                    cell = $('#container div:nth-child(6)');
+                } else if(checkX(5) && checkX(6) && !checkO(4) && !checkX(4)) {
+                    cell = $('#container div:nth-child(4)');
+                } else if(checkX(4) && checkX(6) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkX(7) && checkX(8) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkX(8) && checkX(9) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkX(7) && checkX(9) && !checkO(8) && !checkX(8)) {
+                    cell = $('#container div:nth-child(8)');
+                } else if(checkX(1) && checkX(4) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkX(4) && checkX(7) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)');
+                } else if(checkX(1) && checkX(7) && !checkO(4) && !checkX(4)) {
+                    cell = $('#container div:nth-child(4)');
+                } else if(checkX(2) && checkX(5) && !checkO(8) && !checkX(8)) {
+                    cell = $('#container div:nth-child(8)');
+                } else if(checkX(5) && checkX(8) && !checkO(2) && !checkX(2)) {
+                    cell = $('#container div:nth-child(2)');
+                } else if(checkX(2) && checkX(8) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkX(3) && checkX(6) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkX(6) && checkX(9) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)');
+                } else if(checkX(3) && checkX(9) && !checkO(6) && !checkX(6)) {
+                    cell = $('#container div:nth-child(6)');
+                } else if(checkX(1) && checkX(5) && !checkO(9) && !checkX(9)) {
+                    cell = $('#container div:nth-child(9)');
+                } else if(checkX(5) && checkX(9) && !checkO(1) && !checkX(1)) {
+                    cell = $('#container div:nth-child(1)');
+                } else if(checkX(1) && checkX(9) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } else if(checkX(3) && checkX(5) && !checkO(7) && !checkX(7)) {
+                    cell = $('#container div:nth-child(7)');
+                } else if(checkX(5) && checkX(7) && !checkO(3) && !checkX(3)) {
+                    cell = $('#container div:nth-child(3)');
+                } else if(checkX(3) && checkX(7) && !checkO(5) && !checkX(5)) {
+                    cell = $('#container div:nth-child(5)');
+                } 
+
+                else {
+                    // Getting empty random cell
+                    var emptyCells = $('#container div:not(.x, .o)');
+                    var randomlySelectedIndex = Math.floor(Math.random() * emptyCells.length);
+                    cell = emptyCells[randomlySelectedIndex];
+                }
+  			
+
+  		})
+
+
+  	})  
+
+
+    
+  </script>
+
+</body>
+
+</html>
