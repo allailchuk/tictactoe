@@ -85,12 +85,12 @@
 
         //delaying page reload
         function delayedReload() {
-            window.setTimeout(pageReload, 3500);
+            window.setTimeout(pageReload, 1200);
         }
 
         //winner's greeting
         function winnersGreeting(player) {
-            window.setTimeout(alert(player + " won!"), 2000);
+            window.setTimeout(function() { alert(player + " won!"); }, 300);
         }
 
 
